@@ -1,0 +1,9 @@
+{
+  "name": "sshtest",
+  "version": "0.0.0",
+  "description": "SSHTest",
+  "main": "app.js",
+  "author": {
+    "name": "mbraude"
+  }
+}
