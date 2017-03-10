@@ -8,32 +8,39 @@ var httpServer = http.createServer(function (req, res) {
     console.log("Request Recieved!");
 });
 
-var namedPipeServer = net.createServer((stream: net.Socket) => {
+var _socket: net.Socket = undefined;
+var _originalConsoleLog = console.log;
 
-    var originalConsoleLog = console.log;
-    
-    // When a connection starts, replace console.log with a new one that streams the output
-    namedPipeServer.on("connection", (socket: net.Socket) => {
-        console.log = (message: string) => {
-            stream.write(message);
-        }
+var namedPipeServer = net.createServer((socket: net.Socket) => {
 
-        originalConsoleLog("Cloud Debugger accepted connection from " + socket.remoteAddress);
-    });
+    _socket = socket;
 
-    stream.on("error", (err: Error) => {
-        originalConsoleLog("Error: " + err.name + ": " + err.message);
+    _socket.on("error", (err: Error) => {
+        _originalConsoleLog("Error: " + err.name + ": " + err.message);
     });
     
-    stream.on("data", (data: Buffer) => {
-        originalConsoleLog("Command Recieved: " + data.toString());
+    _socket.on("data", (data: Buffer) => {
+        _originalConsoleLog("Command Recieved: " + data.toString());
     });
     
-    stream.on("end", () => {
-        originalConsoleLog("Client disconnected");
-        console.log = originalConsoleLog;
+    _socket.on("end", () => {
+        _originalConsoleLog("Client disconnected");
+        console.log = _originalConsoleLog;
 
     });
+});
+
+// When a connection starts, replace console.log with a new one that streams the output
+namedPipeServer.on("connection", (socket: net.Socket) => {
+    console.log = (message: string) => {
+        _socket.write(message);
+    }
+
+    _originalConsoleLog("Cloud Debugger accepted connection from " + socket.remoteAddress);
+});
+
+namedPipeServer.on("error", (err: Error) => {
+    _originalConsoleLog("Server error: " + err.name + ": " + err.message);
 });
 
 // Listen on port 80 for the web server:
