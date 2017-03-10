@@ -32,15 +32,23 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\typings\node\node.d.ts" />
+    <Content Include=".gitignore">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="typings\globals\node\typings.json" />
+    <Content Include="typings\modules\ssh2\typings.json" />
     <TypeScriptCompile Include="server.ts" />
     <Content Include="package.json" />
     <Content Include="README.md" />
+    <TypeScriptCompile Include="typings\globals\node\index.d.ts" />
+    <TypeScriptCompile Include="typings\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Scripts\" />
-    <Folder Include="Scripts\typings\" />
-    <Folder Include="Scripts\typings\node\" />
+    <Folder Include="typings\" />
+    <Folder Include="typings\globals\" />
+    <Folder Include="typings\globals\node\" />
+    <Folder Include="typings\modules\" />
+    <Folder Include="typings\modules\ssh2\" />
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />
