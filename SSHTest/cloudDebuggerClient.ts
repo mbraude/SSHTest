@@ -1,6 +1,6 @@
 ﻿import net = require('net');
 
-var client = net.connect(8080, "localhost", () => {
+var client = net.connect("\\\\.\\clouddebugger", () => {
     console.log("Connected to Cloud Debugger");
 });
 

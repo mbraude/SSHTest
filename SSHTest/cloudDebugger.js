@@ -35,5 +35,5 @@ namedPipeServer.on("error", function (err) {
 // Listen on port 80 for the web server:
 httpServer.listen(80);
 // Listen on an IPC channel
-namedPipeServer.listen(8080, "localhost");
+namedPipeServer.listen("\\\\.\\clouddebugger");
 //# sourceMappingURL=cloudDebugger.js.map

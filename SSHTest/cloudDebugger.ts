@@ -26,7 +26,6 @@ var namedPipeServer = net.createServer((socket: net.Socket) => {
     _socket.on("end", () => {
         _originalConsoleLog("Client disconnected");
         console.log = _originalConsoleLog;
-
     });
 });
 
@@ -47,4 +46,4 @@ namedPipeServer.on("error", (err: Error) => {
 httpServer.listen(80);
 
 // Listen on an IPC channel
-namedPipeServer.listen(8080, "localhost");
+namedPipeServer.listen("\\\\.\\clouddebugger");
