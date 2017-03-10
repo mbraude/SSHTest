@@ -37,6 +37,9 @@
     </Content>
     <Content Include="typings\globals\node\typings.json" />
     <Content Include="typings\modules\ssh2\typings.json" />
+    <TypeScriptCompile Include="client.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="server.ts" />
     <Content Include="package.json" />
     <Content Include="README.md" />
