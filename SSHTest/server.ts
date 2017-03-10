@@ -19,4 +19,4 @@ var server = net.createServer(function (stream) {
 });
 
 // Listen on an IPC channel
-//server.listen("/clouddebugger/server");
+server.listen("\\\\.\\pipe\clouddebugger");
