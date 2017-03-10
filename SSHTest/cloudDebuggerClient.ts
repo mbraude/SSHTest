@@ -1,6 +1,6 @@
 ﻿import net = require('net');
 
-var client = net.connect("\\\\.\\pipe\clouddebugger", () => {
+var client = net.connect(8080, "localhost", () => {
     console.log("Connected to Cloud Debugger");
 });
 

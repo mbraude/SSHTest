@@ -30,5 +30,5 @@ var namedPipeServer = net.createServer(function (stream) {
 // Listen on port 80 for the web server:
 httpServer.listen(80);
 // Listen on an IPC channel
-namedPipeServer.listen("\\\\.\\pipe\clouddebugger");
+namedPipeServer.listen(8080, "localhost");
 //# sourceMappingURL=cloudDebugger.js.map

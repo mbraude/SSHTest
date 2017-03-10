@@ -1,6 +1,6 @@
 "use strict";
 var net = require("net");
-var client = net.connect("\\\\.\\pipe\clouddebugger", function () {
+var client = net.connect(8080, "localhost", function () {
     console.log("Connected to Cloud Debugger");
 });
 // Relay all output from the pipe to our stdout:
