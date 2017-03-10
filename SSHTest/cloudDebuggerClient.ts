@@ -12,3 +12,7 @@ client.on("data", (data: Buffer) => {
 client.on('end', function () {
     console.log("Cloud Debugger disconnected unexpectedly");
 })
+
+client.on("error", (err: Error) => {
+    console.log("Error: " + err.name + ": " + err.message);
+});

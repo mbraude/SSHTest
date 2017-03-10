@@ -10,4 +10,7 @@ client.on("data", function (data) {
 client.on('end', function () {
     console.log("Cloud Debugger disconnected unexpectedly");
 });
+client.on("error", function (err) {
+    console.log("Error: " + err.name + ": " + err.message);
+});
 //# sourceMappingURL=cloudDebuggerClient.js.map

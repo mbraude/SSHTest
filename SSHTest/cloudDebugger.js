@@ -16,6 +16,9 @@ var namedPipeServer = net.createServer(function (stream) {
         };
         console.log("Cloud Debugger accepted connection from " + socket.remoteAddress);
     });
+    stream.on("error", function (err) {
+        console.log("Error: " + err.name + ": " + err.message);
+    });
     stream.on("data", function (data) {
         console.log("Command Recieved: " + data.toString());
     });

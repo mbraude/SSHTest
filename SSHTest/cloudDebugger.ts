@@ -11,7 +11,7 @@ var httpServer = http.createServer(function (req, res) {
 var namedPipeServer = net.createServer((stream: net.Socket) => {
 
     var originalConsoleLog = console.log;
-
+    
     // When a connection starts, replace console.log with a new one that streams the output
     namedPipeServer.on("connection", (socket: net.Socket) => {
         console.log = (message: string) => {
@@ -19,6 +19,10 @@ var namedPipeServer = net.createServer((stream: net.Socket) => {
         }
 
         console.log("Cloud Debugger accepted connection from " + socket.remoteAddress);
+    });
+
+    stream.on("error", (err: Error) => {
+        console.log("Error: " + err.name + ": " + err.message);
     });
     
     stream.on("data", (data: Buffer) => {
