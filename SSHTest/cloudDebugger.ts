@@ -2,26 +2,37 @@
 import http = require('http');
 import net = require('net');
 
-http.createServer(function (req, res) {
+var httpServer = http.createServer(function (req, res) {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
     res.end('Hello World\n');
-    //console.log("Request Recieved!");
-    process.stdout.write("Request Recieved!");
-}).listen(80);
+    console.log("Request Recieved!");
+});
 
-var server = net.createServer((stream: net.Socket) => {
+var namedPipeServer = net.createServer((stream: net.Socket) => {
 
-    // pipe stdout to the stream:
-    process.stdout.on("data", (data: Buffer) => stream.write(data));
+    var originalConsoleLog = console.log;
 
+    // When a connection starts, replace console.log with a new one that streams the output
+    namedPipeServer.on("connection", (socket: net.Socket) => {
+        console.log = (message: string) => {
+            stream.write(message);
+        }
+
+        console.log("Cloud Debugger accepted connection from " + socket.remoteAddress);
+    });
+    
     stream.on("data", (data: Buffer) => {
         console.log("Command Recieved: " + data.toString());
     });
     
     stream.on("end", () => {
-        server.close();
+        console.log("Client disconnected");
+        console.log = originalConsoleLog;
     });
 });
 
+// Listen on port 80 for the web server:
+httpServer.listen(80);
+
 // Listen on an IPC channel
-server.listen("\\\\.\\pipe\clouddebugger");
+namedPipeServer.listen("\\\\.\\pipe\clouddebugger");
