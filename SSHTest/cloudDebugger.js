@@ -14,16 +14,16 @@ var namedPipeServer = net.createServer(function (stream) {
         console.log = function (message) {
             stream.write(message);
         };
-        console.log("Cloud Debugger accepted connection from " + socket.remoteAddress);
+        originalConsoleLog("Cloud Debugger accepted connection from " + socket.remoteAddress);
     });
     stream.on("error", function (err) {
-        console.log("Error: " + err.name + ": " + err.message);
+        originalConsoleLog("Error: " + err.name + ": " + err.message);
     });
     stream.on("data", function (data) {
-        console.log("Command Recieved: " + data.toString());
+        originalConsoleLog("Command Recieved: " + data.toString());
     });
     stream.on("end", function () {
-        console.log("Client disconnected");
+        originalConsoleLog("Client disconnected");
         console.log = originalConsoleLog;
     });
 });

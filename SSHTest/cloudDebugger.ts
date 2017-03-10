@@ -18,19 +18,19 @@ var namedPipeServer = net.createServer((stream: net.Socket) => {
             stream.write(message);
         }
 
-        console.log("Cloud Debugger accepted connection from " + socket.remoteAddress);
+        originalConsoleLog("Cloud Debugger accepted connection from " + socket.remoteAddress);
     });
 
     stream.on("error", (err: Error) => {
-        console.log("Error: " + err.name + ": " + err.message);
+        originalConsoleLog("Error: " + err.name + ": " + err.message);
     });
     
     stream.on("data", (data: Buffer) => {
-        console.log("Command Recieved: " + data.toString());
+        originalConsoleLog("Command Recieved: " + data.toString());
     });
     
     stream.on("end", () => {
-        console.log("Client disconnected");
+        originalConsoleLog("Client disconnected");
         console.log = originalConsoleLog;
     });
 });
