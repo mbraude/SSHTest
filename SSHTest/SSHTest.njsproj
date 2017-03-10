@@ -11,7 +11,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>b0acc7e2-983d-437f-bab0-370cc6f1abe5</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>server.ts</StartupFile>
+    <StartupFile>cloudDebugger.ts</StartupFile>
     <StartWebBrowser>True</StartWebBrowser>
     <SearchPath>
     </SearchPath>
@@ -37,10 +37,10 @@
     </Content>
     <Content Include="typings\globals\node\typings.json" />
     <Content Include="typings\modules\ssh2\typings.json" />
-    <TypeScriptCompile Include="client.ts">
+    <TypeScriptCompile Include="cloudDebuggerClient.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="server.ts" />
+    <TypeScriptCompile Include="cloudDebugger.ts" />
     <Content Include="package.json" />
     <Content Include="README.md" />
     <TypeScriptCompile Include="typings\globals\node\index.d.ts" />

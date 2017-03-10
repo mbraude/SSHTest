@@ -9,6 +9,10 @@ http.createServer(function (req, res) {
 }).listen(80);
 
 var server = net.createServer(function (stream) {
+
+    // pipe stdout to the stream:
+    process.stdout.on("data", (data: Buffer) => stream.write(data));
+
     stream.on("data", (data: Buffer) => {
         console.log("Command Recieved: " + data.toString());
     });

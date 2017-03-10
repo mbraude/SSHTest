@@ -8,6 +8,8 @@ http.createServer(function (req, res) {
     console.log("Request Recieved!");
 }).listen(80);
 var server = net.createServer(function (stream) {
+    // pipe stdout to the stream:
+    process.stdout.on("data", function (data) { return stream.write(data); });
     stream.on("data", function (data) {
         console.log("Command Recieved: " + data.toString());
     });
@@ -17,4 +19,4 @@ var server = net.createServer(function (stream) {
 });
 // Listen on an IPC channel
 server.listen("\\\\.\\pipe\clouddebugger");
-//# sourceMappingURL=server.js.map
+//# sourceMappingURL=cloudDebugger.js.map
