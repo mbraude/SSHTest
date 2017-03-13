@@ -33,6 +33,7 @@ var namedPipeServer = net.createServer((socket: net.Socket) => {
 namedPipeServer.on("connection", (socket: net.Socket) => {
     console.log = (message: string) => {
         _socket.write(message);
+        _originalConsoleLog(message);
     }
 
     _originalConsoleLog("Cloud Debugger accepted connection from " + socket.remoteAddress);

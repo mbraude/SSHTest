@@ -4,6 +4,11 @@ var client = net.connect("\\\\.\\clouddebugger", () => {
     console.log("Connected to Cloud Debugger");
 });
 
+// Send stdin to the cloud debugger
+process.stdin.on("data", (data: Buffer) => {
+    client.write(data.toString());
+});
+
 // Relay all output from the pipe to our stdout:
 client.on("data", (data: Buffer) => {
     console.log(data.toString());
