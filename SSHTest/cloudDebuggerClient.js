@@ -11,7 +11,7 @@ process.stdin.on("data", function (data) {
 client.on("data", function (data) {
     console.log(data.toString());
 });
-client.on('end', function () {
+client.on("end", function () {
     console.log("Cloud Debugger disconnected unexpectedly");
 });
 client.on("error", function (err) {

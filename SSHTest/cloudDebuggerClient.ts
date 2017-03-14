@@ -14,7 +14,7 @@ client.on("data", (data: Buffer) => {
     console.log(data.toString());
 });
 
-client.on('end', function () {
+client.on("end", function () {
     console.log("Cloud Debugger disconnected unexpectedly");
 })
 

@@ -30,6 +30,9 @@ namedPipeServer.on("connection", function (socket) {
     };
     _originalConsoleLog("Cloud Debugger accepted connection from " + socket.remoteAddress);
 });
+namedPipeServer.on("close", function () {
+    _originalConsoleLog("Named pipe closed");
+});
 namedPipeServer.on("error", function (err) {
     _originalConsoleLog("Server error: " + err.name + ": " + err.message);
 });

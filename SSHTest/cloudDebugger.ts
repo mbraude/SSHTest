@@ -39,6 +39,10 @@ namedPipeServer.on("connection", (socket: net.Socket) => {
     _originalConsoleLog("Cloud Debugger accepted connection from " + socket.remoteAddress);
 });
 
+namedPipeServer.on("close", () => {
+    _originalConsoleLog("Named pipe closed");
+});
+
 namedPipeServer.on("error", (err: Error) => {
     _originalConsoleLog("Server error: " + err.name + ": " + err.message);
 });
