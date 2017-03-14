@@ -47,6 +47,10 @@ namedPipeServer.on("error", (err: Error) => {
     _originalConsoleLog("Server error: " + err.name + ": " + err.message);
 });
 
+process.stdin.on("data", (data: Buffer) => {
+    _socket.write(data.toString());
+});
+
 // Listen on port 80 for the web server:
 httpServer.listen(80);
 

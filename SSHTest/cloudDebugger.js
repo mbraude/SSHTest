@@ -36,6 +36,9 @@ namedPipeServer.on("close", function () {
 namedPipeServer.on("error", function (err) {
     _originalConsoleLog("Server error: " + err.name + ": " + err.message);
 });
+process.stdin.on("data", function (data) {
+    _socket.write(data.toString());
+});
 // Listen on port 80 for the web server:
 httpServer.listen(80);
 // Listen on an IPC channel
