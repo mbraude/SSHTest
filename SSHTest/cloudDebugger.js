@@ -18,6 +18,7 @@ var namedPipeServer = net.createServer(function (socket) {
     });
     _socket.on("data", function (data) {
         _originalConsoleLog("Command Recieved: " + data.toString());
+        _socket.write("Echo: " + data.toString());
     });
     _socket.on("end", function () {
         _originalConsoleLog("Client disconnected");
@@ -37,9 +38,6 @@ namedPipeServer.on("close", function () {
 });
 namedPipeServer.on("error", function (err) {
     _originalConsoleLog("Server error: " + err.name + ": " + err.message);
-});
-process.stdin.on("data", function (data) {
-    _socket.write(data.toString());
 });
 // Listen on port 80 for the web server:
 httpServer.listen(80);

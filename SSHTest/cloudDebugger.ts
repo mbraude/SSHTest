@@ -24,6 +24,7 @@ var namedPipeServer = net.createServer((socket: net.Socket) => {
     
     _socket.on("data", (data: Buffer) => {
         _originalConsoleLog("Command Recieved: " + data.toString());
+        _socket.write("Echo: " + data.toString());
     });
     
     _socket.on("end", () => {
@@ -48,10 +49,6 @@ namedPipeServer.on("close", () => {
 
 namedPipeServer.on("error", (err: Error) => {
     _originalConsoleLog("Server error: " + err.name + ": " + err.message);
-});
-
-process.stdin.on("data", (data: Buffer) => {
-    _socket.write(data.toString());
 });
 
 // Listen on port 80 for the web server:
